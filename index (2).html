@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ServingSeeds: IT, media and production and education and tutoring in Memphis, TN.">
+<title>ServingSeeds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a small public storefront on top; below it, an owner-only "Office" with tabs for work, invoices, money in and out. */
+:root{
+  --bg:#F3F6F1; --surface:#FFFFFF; --sunk:#E7EDE4; --line:#D3DCCF;
+  --ink:#18221C; --muted:#5A675F;
+  --green:#2E6A4C; --green-ink:#FFFFFF; --seed:#B57E14; --seed-soft:#F4E7C8;
+  --ok:#2E7D4F; --warn:#A86A00; --bad:#B23A2E;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121814; --surface:#1A221C; --sunk:#222C25; --line:#334036;
+  --ink:#E6EDE7; --muted:#9AA89F; --green:#6FBF93; --green-ink:#0E1511; --seed:#E0AE4A; --seed-soft:#3A2F17;
+  --ok:#6FCB94; --warn:#E5AE52; --bad:#F08A7E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121814; --surface:#1A221C; --sunk:#222C25; --line:#334036;
+  --ink:#E6EDE7; --muted:#9AA89F; --green:#6FBF93; --green-ink:#0E1511; --seed:#E0AE4A; --seed-soft:#3A2F17;
+  --ok:#6FCB94; --warn:#E5AE52; --bad:#F08A7E; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:-.02em}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+a{color:var(--green)}
+.mono,.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.25rem}
+.brand svg{flex:none}
+nav.site{display:flex;gap:6px;flex-wrap:wrap}
+.btn{font:600 .95rem var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--green)}
+.btn.primary{background:var(--green);color:var(--green-ink);border-color:var(--green)}
+.btn.seed{background:var(--seed);color:#fff;border-color:var(--seed)}
+.btn.small{padding:4px 10px;font-size:.85rem}
+.btn.danger{color:var(--bad)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--seed);outline-offset:2px}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center;padding-block:28px 40px}
+.hero p.lede{font-size:1.15rem;color:var(--muted);max-width:52ch;margin-top:14px}
+.hero .ctas{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.rows{border-top:2px solid var(--ink)}
+.rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.rows span:last-child{color:var(--muted)}
+section.block{padding-block:28px;border-top:1px solid var(--line)}
+.svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:18px}
+.svc article{display:flex;flex-direction:column;gap:8px;min-width:0}
+.svc .tag{font-family:var(--mono);font-size:.8rem;color:var(--seed)}
+.svc ul{margin:0;padding-left:18px;color:var(--muted)}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;min-width:0}
+.note{color:var(--muted);font-size:.92rem}
+footer{padding-block:28px 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+/* Office */
+.office{margin-top:12px;border-top:3px solid var(--seed);padding-block:24px 40px}
+.office-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:18px 0;border-bottom:1px solid var(--line)}
+.tabs button{font:600 .95rem var(--body);background:none;border:0;border-bottom:3px solid transparent;padding:8px 12px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stats div{background:var(--surface);padding:14px 16px;min-width:0}
+.stats b{display:block;font-family:var(--mono);font-size:1.35rem;font-weight:500;margin-top:4px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px;margin-top:20px;align-items:start}
+form.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+form.f .full{grid-column:1/-1}
+label{display:flex;flex-direction:column;gap:4px;font-size:.85rem;font-weight:600;color:var(--muted)}
+input,select,textarea{font:400 1rem var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:8px 10px;width:100%;min-width:0}
+textarea{min-height:64px;resize:vertical}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th{text-align:left;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px;border-bottom:2px solid var(--line);white-space:nowrap}
+td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.r,th.r{text-align:right}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.draft{color:var(--muted)} .pill.sent{color:var(--warn)} .pill.paid{color:var(--ok)} .pill.overdue{color:var(--bad)}
+.pill.open{color:var(--warn)} .pill.done{color:var(--green)} .pill.invoiced{color:var(--muted)}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+.ex{font-size:.7rem;font-weight:700;color:var(--seed);background:var(--seed-soft);padding:1px 6px;border-radius:4px;margin-left:6px}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:600;z-index:20}
+.inv-doc{background:#fff;color:#18221C;border:1px solid var(--line);border-radius:10px;padding:28px;margin-top:14px}
+.inv-doc table td,.inv-doc table th{border-color:#D3DCCF;color:#18221C}
+.inv-doc .muted{color:#5A675F}
+.checks{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:7px;padding:8px}
+.checks label{flex-direction:row;align-items:center;gap:8px;color:var(--ink);font-weight:400}
+.checks input{width:auto}
+.steps li{margin-bottom:6px}
+@media (max-width:760px){
+  .hero,.pay,.grid2{grid-template-columns:1fr}
+  .svc{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  form.f{grid-template-columns:1fr}
+}
+@media (max-width:480px){ .svc{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="14" fill="var(--green)"/><path d="M15 23V13M15 15c0-4 3-6 7-6 0 4-3 6-7 6zM15 18c0-3-2.5-5-6-5 0 3 2.5 5 6 5z" stroke="var(--green-ink)" stroke-width="1.8" fill="var(--green-ink)" stroke-linecap="round"/></svg>
+      <span>ServingSeeds</span>
+    </div>
+    <nav class="site">
+      <a class="btn" href="#services">Services</a>
+      <a class="btn" href="#pay">Pay an invoice</a>
+      <a class="btn" href="#contact">Contact</a>
+          </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Memphis, Tennessee</p>
+      <h1>Technology, media and teaching for the organizations that serve people.</h1>
+      <p class="lede">ServingSeeds sets up and fixes the tech, produces the media and tutors learners for the churches, ministries, schools and small businesses that depend on them. One provider, one invoice, paid online.</p>
+      <div class="ctas"><a class="btn primary" href="#contact">Request work</a><a class="btn" href="#pay">Pay an invoice</a></div>
+    </div>
+    <div class="rows" aria-label="At a glance">
+      <div><span>IT &amp; tech support</span><span>On-site or remote</span></div>
+      <div><span>Media &amp; production</span><span>Sound, video, print</span></div>
+      <div><span>Education &amp; tutoring</span><span>Students &amp; adults</span></div>
+      <div><span>Payment</span><span>Card or bank (ACH)</span></div>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <p class="eyebrow">Services</p>
+    <h2>What we do</h2>
+    <div class="svc">
+      <article><span class="tag">IT-01</span><h3>IT &amp; tech services</h3>
+        <ul><li>Computer, printer and Wi-Fi setup and repair</li><li>Email, accounts, backups and security</li><li>Office and ministry tech, one-time or ongoing</li></ul></article>
+      <article><span class="tag">MED-02</span><h3>Media &amp; production</h3>
+        <ul><li>Livestream, sound board and projection</li><li>Programs, bulletins, flyers and slides</li><li>Event recording and editing</li></ul></article>
+      <article><span class="tag">EDU-03</span><h3>Education &amp; tutoring</h3>
+        <ul><li>One-on-one and small-group tutoring</li><li>Computer and technology classes for adults and seniors</li><li>Training for church and office volunteers</li></ul></article>
+    </div>
+  </section>
+
+  <section class="block" id="pay">
+    <p class="eyebrow">Payments</p>
+    <h2>Pay an invoice</h2>
+    <div class="pay">
+      <div class="panel">
+        <p>Each invoice we send includes its own secure payment link. Use that link to pay the exact amount by card or bank transfer (ACH).</p>
+        <p class="note" style="margin-top:10px">No link? Use the button below and enter your invoice number in the payment note.</p>
+        <p style="margin-top:14px"><a class="btn seed" id="genPay" href="#" target="_blank" rel="noopener" hidden>Make a payment</a><span class="note" id="genPayNone">Online payment opens soon. Contact us for payment options.</span></p>
+      </div>
+      <div class="panel">
+        <h3>Paying by bank (ACH)?</h3>
+        <p class="note" style="margin-top:6px">Bank payments cost us less and are the preferred way to pay larger invoices. Payments are processed securely by Stripe; we never see your card or bank numbers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <p class="eyebrow">Contact</p>
+    <h2>Request work</h2>
+    <div class="pay">
+      <div class="panel"><p>Tell us what you need, when, and where. We reply with a quote before any work starts.</p></div>
+      <div class="panel" id="contactBox"><p class="note">Contact details coming soon.</p></div>
+    </div>
+  </section>
+
+  <footer>© <span id="yr"></span> ServingSeeds · Memphis, TN</footer>
+</div>
+<script>
+/* ===== EDIT THESE THREE LINES, then commit ===== */
+const SITE = {
+  email: "",      /* e.g. "hello@servingseeds.com" */
+  phone: "",      /* e.g. "(901) 555-0123" */
+  payLink: ""     /* your general Stripe Payment Link, starts with https://buy.stripe.com/ */
+};
+/* =============================================== */
+document.getElementById("yr").textContent = new Date().getFullYear();
+const pay = document.getElementById("genPay");
+if (/^https:\/\//.test(SITE.payLink)) { pay.href = SITE.payLink; pay.hidden = false; document.getElementById("genPayNone").hidden = true; }
+if (SITE.email || SITE.phone) {
+  const box = document.getElementById("contactBox"); box.innerHTML = "<h3>Reach us</h3>";
+  if (SITE.email) { const p = document.createElement("p"); p.style.marginTop = "8px"; p.innerHTML = 'Email: <a></a>'; const a = p.querySelector("a"); a.href = "mailto:" + SITE.email; a.textContent = SITE.email; box.appendChild(p); }
+  if (SITE.phone) { const p = document.createElement("p"); p.style.marginTop = "6px"; p.innerHTML = 'Phone: <a></a>'; const a = p.querySelector("a"); a.href = "tel:" + SITE.phone.replace(/[^0-9+]/g, ""); a.textContent = SITE.phone; box.appendChild(p); }
+}
+</script>
+</body>
+</html>
